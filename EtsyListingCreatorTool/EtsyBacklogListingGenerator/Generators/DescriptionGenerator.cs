@@ -1,7 +1,7 @@
 ﻿using EtsyBacklogListingGenerator.AI;
 
 
-namespace EtsyBacklogListingGenerator
+namespace EtsyBacklogListingGenerator.Generators
 {
     internal class DescriptionGenerator(OpenAIManager aiManager)
     {

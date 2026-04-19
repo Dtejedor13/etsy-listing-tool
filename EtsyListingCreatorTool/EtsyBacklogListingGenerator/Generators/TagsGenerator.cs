@@ -1,6 +1,6 @@
 ﻿using EtsyBacklogListingGenerator.AI;
 
-namespace EtsyBacklogListingGenerator
+namespace EtsyBacklogListingGenerator.Generators
 {
     internal class TagsGenerator(OpenAIManager aiManager)
     {
