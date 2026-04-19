@@ -17,6 +17,10 @@ var scaleCalculator = new ScaleCalculator();
 
 foreach (var directory in Directory.GetDirectories("F:\\Etsy Shop\\Backlog"))
 {
+    var directoryName = directory.Split('.')[0].Split("\\").Last();
+    if (directoryName.StartsWith("_"))
+        continue;
+
     if (!File.Exists($"{directory}/images/finish_types_v3.png"))
         File.Copy("F:\\Etsy Shop\\docs\\finish_types_v3.png", $"{directory}/images/finish_types_v3.png");
     if (!File.Exists($"{directory}/images/Painted_commision.png"))

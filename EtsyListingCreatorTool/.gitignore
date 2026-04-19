@@ -1,0 +1,65 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+out/
+publish/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# Local .NET CLI / tooling state
+.dotnet-home/
+.dotnet/
+.store/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.assets.json
+*.nuget.props
+*.nuget.targets
+
+# Generated files
+Generated/
+*.g.cs
+*.generated.cs
+
+# Test results and coverage
+TestResults/
+coverage/
+coverage.*
+*.coverage
+*.coveragexml
+
+# Logs
+*.log
+logs/
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Local environment / secrets
+.env
+.env.*
+*.local
+appsettings.Development.json
+secrets.json
+
+# Project-specific local data
+Properties/launchSettings.json
