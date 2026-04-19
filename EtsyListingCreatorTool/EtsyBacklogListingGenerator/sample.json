@@ -1,0 +1,10 @@
+{
+  "name": "figure name",
+  "universe": "anime",
+  "additional_infos": "this is just a test",
+  "original_size": "44",
+  "default_scale": 6,
+  "scales": [ 6, 8, 10 ],
+  "clear_resin": false,
+  "creator": "jesus"
+}

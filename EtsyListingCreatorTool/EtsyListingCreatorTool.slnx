@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="EtsyBacklogListingGenerator.AI/EtsyBacklogListingGenerator.AI.csproj" Id="ec8a2bc0-2391-46d5-9c94-0637fa62e362" />
+  <Project Path="EtsyBacklogListingGenerator/EtsyBacklogListingGenerator.csproj" Id="bdc00d23-4303-4a9a-9fb8-bfd5e72afef9" />
+</Solution>
