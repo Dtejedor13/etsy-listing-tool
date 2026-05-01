@@ -6,35 +6,36 @@ namespace EtsyBacklogListingGenerator.Generators
     internal class VariationsGenerator
     {
         private ScaleCalculator scaleCalculator = new ScaleCalculator();
-        private Dictionary<int, int> priceList = new Dictionary<int, int>()
+        private Dictionary<int, double> priceList = new Dictionary<int, double>()
         {
-            { 10, 25 },
-            { 8, 45 },
-            { 6, 79 }
+            { 10, 29.99 },
+            { 8, 49.99 },
+            { 6, 84.99 }
         };
+        private double polishPrice = 30;
 
         public string GenerateVariationsString(JsonNode listingInfo)
         {
             var defaultScale = Convert.ToInt16(listingInfo["default_scale"]!.ToString());
             var defaultSize = Convert.ToDouble(listingInfo["original_size"]!.ToString());
             var scaleOptions = listingInfo["scales"]!.AsArray();
-            var sizes = new List<KeyValuePair<string, int>>();
+            var sizes = new List<KeyValuePair<string, double>>();
             var scaleFrom = scaleCalculator.TranslateToScale(defaultScale);
             foreach (var scaleOption in scaleOptions)
             {
                 var scaleOpt = Convert.ToInt16(scaleOption!.ToString());
                 var scaledSize = scaleCalculator.Convert(defaultSize, scaleFrom, scaleCalculator.TranslateToScale(scaleOpt));
                 var roudedSize = Math.Round(scaledSize, 0);
-                sizes.Add(new KeyValuePair<string, int>($"DIY ({roudedSize} cm)", priceList[scaleOpt]));
-                sizes.Add(new KeyValuePair<string, int>($"Polished ({roudedSize} cm)", priceList[scaleOpt] + 30));
+                sizes.Add(new KeyValuePair<string, double>($"DIY ({roudedSize} cm)", priceList[scaleOpt]));
+                sizes.Add(new KeyValuePair<string, double>($"Polished ({roudedSize} cm)", priceList[scaleOpt] + polishPrice));
             }
-            sizes.Add(new KeyValuePair<string, int>("For Painted DM me!", 200));
+            sizes.Add(new KeyValuePair<string, double>("For Painted DM me!", 200.00));
 
             return FormatAndSortSizes(sizes);
         }
 
 
-        private string FormatAndSortSizes(List<KeyValuePair<string, int>> sizes)
+        private string FormatAndSortSizes(List<KeyValuePair<string, double>> sizes)
         {
             int ExtractSize(string key)
             {
@@ -57,7 +58,7 @@ namespace EtsyBacklogListingGenerator.Generators
                 .Concat(polished)
                 .Concat(dm);
 
-            return string.Join("\n", ordered.Select(s => $"- {s.Key} {s.Value}"));
+            return string.Join("\n", ordered.Select(s => $"- {s.Key} {Math.Truncate(s.Value*100) / 100}".Replace(".", ",")));
         }
     }
 }

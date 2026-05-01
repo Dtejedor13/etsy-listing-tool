@@ -3,7 +3,7 @@
 
 namespace EtsyBacklogListingGenerator.Generators
 {
-    internal class DescriptionGenerator(OpenAIManager aiManager)
+    internal class DescriptionGenerator(OpenAIManager aiManager) : AISupportedGenerator
     {
         private Dictionary<string, string> CreatorInfoMap = new Dictionary<string, string>()
         {
@@ -33,59 +33,77 @@ Supporting talented creators is an important part of this project.
 Patreon: https://www.patreon.com/cw/myanimate"""}
         };
 
-        private const string template = """
-            {header}
+        private const string descriptionSystemPrompt = @"private const string descriptionSystemPrompt = @""
+        Create an Etsy listing DESCRIPTION.
 
-            ⚪ Available Finish Options
-            You can choose the finish level that best fits your project:
+        DATA INPUT:
+        Character: {name}
+        Universe: {universe}
+        Available sizes and prices:
+        {sizes}
 
-            ⚪ DIY (Basic Print)
-            Supports removed
-            Washed & fully cured
-            Quality checked
-            All parts included (complete kit)
-            Assembly instructions included (created by me)
-            Resin handling & safety guide included (created by me)
-            Ready for your own sanding, filling and painting
-            Best for: hobbyists who want full control over the finishing process
+        Creator information (MUST be included exactly as written, do NOT rewrite):
+        {creator}
 
-            ⚪ Polished (Refined Print)
-            Everything from DIY, plus:
-            Support marks sanded
-            Visible holes filled
-            Smoother surface finish
-            Ready for priming and painting
-            Best for: painters who want to save preparation time
+        IMPORTANT:
+        - The creator is the sculptor of the model, NOT the character
+        - NEVER describe the creator as a character
 
-            ⚪ Painted (On Request – Limited Slots)
-            Painting is offered only when slots are available and must be discussed before purchase.
-            Two painting levels are available:
-            Each painted figure is a unique, handcrafted piece.
+        CRITICAL RULES:
+        - ONLY use the provided character and universe
+        - NEVER mention other anime, franchises, or characters
+        - NEVER invent names or replace the character
 
-            ⚪ Painting Portfolio
-            You can view examples of my painting quality and previous projects here:
-            Instagram: https://www.instagram.com/denis_n_tejedor
+        SEO INTRO (MANDATORY):
+        Write 2–3 sentences including:
+        - character name
+        - universe
+        - """"resin figure""""
+        - """"collectible"""" or """"statue""""
+        - mention availability (DIY / Polished / Painted)
 
-            This allows you to clearly see my painting style and skill level before requesting a painted commission.
+        Example style:
+        High-quality {name} resin figure from {universe}.
+        This fan art collectible statue is available as a DIY kit, polished version, or painted option—perfect for collectors and display setups.
 
-            ⚪ Artist Credit & Licensing
-            {creator}
+        CHARACTER DESCRIPTION:
+        - Write a cinematic paragraph about THIS character
+        - Include 1 relevant keyword if applicable (e.g. Akatsuki, Saiyan, Pirate)
+        - Keep it accurate to the character
 
-            ⚪ Shipping
-            All orders are shipped via DHL with tracking and insurance.
-            Each order is carefully packaged for safe delivery.
+        STRUCTURE:
+        1. SEO Intro
+        2. Character Description
+        3. Product Details
+        4. Finish Options (DIY / Polished / Painted)
+        5. Artist Credit (insert creator text EXACTLY)
 
-            Germany: 6.49 €
-            International: 19.99 €
+        DO NOT:
+        - mix universes
+        - invent keywords
+        - hallucinate brand names
+        - repeat keywords unnaturally
 
-            If your actual shipping cost is lower, I will refund the difference.
-            """;
+        STYLE:
+        - clean formatting
+        - natural language
+        - no emoji spam
+        - no generic filler text
 
-        public async Task<string> GenerateDescriptionAsync(string characterPrompt, string creator)
+        OUTPUT:
+        Return clean formatted listing text only.
+        "";";
+
+        public async Task<string> GenerateDescriptionAsync(string name, string universe, string sizes, string creator)
         {
-            var header = await aiManager.AskAsync($"description for {characterPrompt}");
-            var description = template;
-            return description.Replace("{header}", header).Replace("{creator}", CreatorInfoMap[creator]);
+            var filledPrompt = descriptionSystemPrompt
+            .Replace("{name}", name)
+            .Replace("{universe}", universe)
+            .Replace("{sizes}", sizes)
+            .Replace("{creator}", CreatorInfoMap[creator]);
+
+            var prompt = $"{GenericSystemPrompt}\n\n{filledPrompt}";
+            return await aiManager.AskAsync(prompt);
         }
     }
 }
