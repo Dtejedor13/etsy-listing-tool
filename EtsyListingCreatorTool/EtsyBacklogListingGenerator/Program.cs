@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
+using EtsyBacklogListingGenerator;
 using EtsyBacklogListingGenerator.AI;
 using EtsyBacklogListingGenerator.Generators;
 
@@ -12,14 +12,13 @@ var titleGenerator = new TitleGenerator(aiManager);
 
 Console.WriteLine("Select mode c => create listing, u => update listing");
 var mode = Console.ReadLine()!.ToLower();
+Console.Clear();
 
-
-switch(mode)
+switch (mode)
 {
     case "u":
         while (true)
         {
-            Console.Clear();
             JsonNode info = new JsonObject();
             Console.WriteLine("enter character name (CaseSensitive!)");
             info["name"] = Console.ReadLine();
@@ -83,49 +82,38 @@ switch(mode)
 
 async Task<string> GeneratListingInfoAsync(JsonNode listingInfo)
 {
-    var characterPrompt = CreateCharacterPrompt(listingInfo);
+    var characterPrompt = Utils.CreateCharacterPrompt(listingInfo);
 
     // call generators
     var characterName = listingInfo["name"]!.ToString();
     var characterUniverse = listingInfo["universe"]!.ToString();
     var scaleOptions = listingInfo["scales"]!.AsArray();
-    var availibleScalesString = GetAvailibleScalesString(scaleOptions);
+    var availibleScalesString = Utils.GetAvailibleScalesString(scaleOptions);
     var description = await descriptionGenerator.GenerateDescriptionAsync(characterName, characterUniverse, availibleScalesString, listingInfo["creator"]!.ToString());
     var variationString = variationsGenerator.GenerateVariationsString(listingInfo);
     var tags = await tagsGenerator.GenerateTagsAsync(characterPrompt);
     var title = await titleGenerator.GenerateTitleAsync(characterName, characterUniverse);
 
-    return $"{title}\n\n{description}\n\n{variationString}\n\n{tags}";
+    return $"{title}\n\n{description}\n\nDIY Unpainted\n\nPolished Unpainted\n\nPainted (DM me!)\n\n{variationString}\n\n{tags}";
 }
 
 JsonNode GetInfo(string basePath)
 {
+    JsonNode node;
+
     using (var stream = new FileStream($"{basePath}/info.json", FileMode.Open, FileAccess.Read))
     using (var reader = new StreamReader(stream))
     {
         var json = reader.ReadToEnd();
-        var node = JsonNode.Parse(json);
-        return node!;
+        node = JsonNode.Parse(json);
     }
-}
 
-string GetAvailibleScalesString(JsonArray scales)
-{
-    var availableScales = string.Empty;
-
-    foreach (var scaleOption in scales)
+    using (var stream = new FileStream($"{basePath}/points.json", FileMode.Open, FileAccess.Read))
+    using (var reader = new StreamReader(stream))
     {
-        if (string.IsNullOrEmpty(availableScales))
-            availableScales += $" 1/{scaleOption}";
-        else
-            availableScales += $", 1/{scaleOption}";
+        var json = reader.ReadToEnd();
+        node["points"] = JsonNode.Parse(json);
     }
-    return availableScales;
-}
 
-string CreateCharacterPrompt(JsonNode listingInfo)
-{
-    var scaleOptions = listingInfo["scales"]!.AsArray();
-    var additionalInfo = listingInfo["additional_infos"]?.ToString() ?? string.Empty;
-    return $"{listingInfo["name"]} from {listingInfo["universe"]} available scales are {GetAvailibleScalesString(scaleOptions)}, additional infos: {additionalInfo}";
+    return node!;
 }

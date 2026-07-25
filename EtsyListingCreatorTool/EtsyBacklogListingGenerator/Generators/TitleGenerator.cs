@@ -2,7 +2,7 @@
 
 namespace EtsyBacklogListingGenerator.Generators
 {
-    internal class TitleGenerator(OpenAIManager aIManager) : AISupportedGenerator
+    public class TitleGenerator(OpenAIManager aIManager) : AISupportedGenerator
     {
         public async Task<string> GenerateTitleAsync(string name, string universe)
         {

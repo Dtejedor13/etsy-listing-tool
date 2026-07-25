@@ -2,7 +2,7 @@
 
 namespace EtsyBacklogListingGenerator.Generators
 {
-    abstract class AISupportedGenerator()
+    public abstract class AISupportedGenerator()
     {
         protected string GenericSystemPrompt = @"You are an expert Etsy SEO copywriter specialized in collectible resin figures and fan art statues.
         Write natural, high-converting listings optimized for Etsy search.

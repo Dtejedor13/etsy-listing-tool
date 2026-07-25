@@ -3,7 +3,7 @@
 
 namespace EtsyBacklogListingGenerator.Generators
 {
-    internal class DescriptionGenerator(OpenAIManager aiManager) : AISupportedGenerator
+    public class DescriptionGenerator(OpenAIManager aiManager) : AISupportedGenerator
     {
         private Dictionary<string, string> CreatorInfoMap = new Dictionary<string, string>()
         {
