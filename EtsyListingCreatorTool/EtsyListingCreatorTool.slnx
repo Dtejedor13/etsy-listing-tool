@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="EtsyBacklogListingGenerator.AI/EtsyBacklogListingGenerator.AI.csproj" Id="ec8a2bc0-2391-46d5-9c94-0637fa62e362" />
+  <Project Path="EtsyBacklogListingGenerator.AI/EtsyBacklogListingGenerator.AI.csproj" Id="b4d39104-0590-48cc-915c-39e092b1df85" />
+  <Project Path="EtsyBacklogListingGenerator.Etsy/EtsyBacklogListingGenerator.Etsy.csproj" Id="6eb22eb6-45d9-4ef8-abfa-607f7119ecd0" />
   <Project Path="EtsyBacklogListingGenerator/EtsyBacklogListingGenerator.csproj" Id="bdc00d23-4303-4a9a-9fb8-bfd5e72afef9" />
-  <Project Path="EtsyListingUpdater/EtsyListingUpdater.csproj" Id="c3ac810b-3388-4d3a-9d89-b7b046413293" />
 </Solution>

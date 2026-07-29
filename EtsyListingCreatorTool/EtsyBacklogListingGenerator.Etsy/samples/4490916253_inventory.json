@@ -1,0 +1,342 @@
+{
+  "products": [
+    {
+      "product_id": 32366506419,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575802,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 2999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1454550495051
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1486046483622 ],
+          "values": [ "DIY Unpainted" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1492146720738 ],
+          "values": [ "1\/10 30 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32681982416,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575800,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 4999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1454550495051
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1486046483622 ],
+          "values": [ "DIY Unpainted" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1493309666393 ],
+          "values": [ "1\/8 42 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32366506415,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575798,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 8499,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1454550495051
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1486046483622 ],
+          "values": [ "DIY Unpainted" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1493309666549 ],
+          "values": [ "1\/6 60 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32366506413,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32521286053,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 5999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1461461486786
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1486046483756 ],
+          "values": [ "Polished Unpainted" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1492146720738 ],
+          "values": [ "1\/10 30 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32681982412,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575796,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 7999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1461461486786
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1486046483756 ],
+          "values": [ "Polished Unpainted" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1493309666393 ],
+          "values": [ "1\/8 42 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32366506405,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575794,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 11499,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1461461486786
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1486046483756 ],
+          "values": [ "Polished Unpainted" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1493309666549 ],
+          "values": [ "1\/6 60 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32681982406,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575792,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 25999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1462591816367
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1463954854361 ],
+          "values": [ "Painted (DM me!)" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1492146720738 ],
+          "values": [ "1\/10 30 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32681982402,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575790,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 27999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1462591816367
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1463954854361 ],
+          "values": [ "Painted (DM me!)" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1493309666393 ],
+          "values": [ "1\/8 42 cm" ]
+        }
+      ]
+    },
+    {
+      "product_id": 32681982396,
+      "sku": "",
+      "is_deleted": false,
+      "offerings": [
+        {
+          "offering_id": 32611575788,
+          "quantity": 10,
+          "is_enabled": true,
+          "is_deleted": false,
+          "price": {
+            "amount": 30999,
+            "divisor": 100,
+            "currency_code": "EUR"
+          },
+          "readiness_state_id": 1462591816367
+        }
+      ],
+      "property_values": [
+        {
+          "property_id": 513,
+          "property_name": "Finish",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1463954854361 ],
+          "values": [ "Painted (DM me!)" ]
+        },
+        {
+          "property_id": 514,
+          "property_name": "Scale",
+          "scale_id": null,
+          "scale_name": null,
+          "value_ids": [ 1493309666549 ],
+          "values": [ "1\/6 60 cm" ]
+        }
+      ]
+    }
+  ],
+  "price_on_property": [ 513, 514 ],
+  "quantity_on_property": [],
+  "sku_on_property": [],
+  "readiness_state_on_property": [ 513, 514 ],
+  "listing": null
+}

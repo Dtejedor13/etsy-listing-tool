@@ -63,3 +63,4 @@ secrets.json
 
 # Project-specific local data
 Properties/launchSettings.json
+Data/

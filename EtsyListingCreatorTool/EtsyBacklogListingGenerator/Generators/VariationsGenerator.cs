@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
+using EtsyBacklogListingGenerator.Inventory;
 
 namespace EtsyBacklogListingGenerator.Generators
 {
@@ -50,6 +51,79 @@ namespace EtsyBacklogListingGenerator.Generators
 
         private double paintedPrice = 200;
 
+        public FinishScalePriceStructure GenerateFigurePriceStructure(JsonNode listingInfo)
+        {
+            var defaultScale = Convert.ToInt16(listingInfo["default_scale"]!.ToString());
+            var defaultSize = Convert.ToDouble(listingInfo["original_size"]!.ToString());
+            var scaleOptions = listingInfo["scales"]!.AsArray();
+            var sizes = new List<KeyValuePair<string, double>>();
+            var scaleFrom = scaleCalculator.TranslateToScale(defaultScale);
+            var figureTier = calculatePointsAndDefinePriceList(listingInfo);
+
+            var processingTimes = new FigureFinishProcessingTimes
+            {
+                DiyUnpainted = new ProcessingTime { 
+                    Minimum = figureTier.Tier != 3? 4 : 7, 
+                    Maximum = 10 
+                },
+                PolishedUnpainted = new ProcessingTime
+                {
+                    Minimum = 2,
+                    Maximum = 2,
+                    Unit = ProcessingTimeUnit.Weeks
+                },
+                Painted = new ProcessingTime
+                {
+                    Minimum = 4,
+                    Maximum = 6,
+                    Unit = ProcessingTimeUnit.Weeks
+                }
+            };
+
+
+            var structure = new FinishScalePriceStructure();
+            structure.Finishes.Add(new FinishPricing
+            {
+                Name = "DIY Unpainted",
+                ProcessingTime = processingTimes.DiyUnpainted,
+                Scales = new List<ScalePricing>()
+            });
+            structure.Finishes.Add(new FinishPricing
+            {
+                Name = "Polished Unpainted",
+                ProcessingTime = processingTimes.PolishedUnpainted,
+                Scales = new List<ScalePricing>()
+            });
+            structure.Finishes.Add(new FinishPricing
+            {
+                Name = "Painted(DM me!)",
+                ProcessingTime = processingTimes.Painted,
+                Scales = new List<ScalePricing>()
+            });
+
+           
+            foreach (var scaleOption in scaleOptions.OrderByDescending(x => x!.GetValue<int>()))
+            {
+                var scaleOpt = Convert.ToInt16(scaleOption!.ToString());
+                var scaledSize = scaleCalculator.Convert(defaultSize, scaleFrom, scaleCalculator.TranslateToScale(scaleOpt));
+                var roudedSize = Math.Round(scaledSize, 0);
+
+                foreach (var finishStruture in structure.Finishes)
+                {
+                    finishStruture.Scales.Add(new ScalePricing
+                    {
+                        Name = $"1/{scaleOption} {roudedSize} cm",
+                        Price = Convert.ToDecimal(
+                            finishStruture.Name == "DIY Unpainted" ? figureTier.PriceList[scaleOpt] :
+                            finishStruture.Name == "Polished Unpainted" ? figureTier.PriceList[scaleOpt] + polishePrices[scaleOpt] :
+                            figureTier.PriceList[scaleOpt] + polishePrices[scaleOpt] + paintedPrice
+                            )
+                    });
+                }
+            }
+            return structure;
+        }
+
         public string GenerateVariationsString(JsonNode listingInfo)
         {
             var defaultScale = Convert.ToInt16(listingInfo["default_scale"]!.ToString());
@@ -57,16 +131,16 @@ namespace EtsyBacklogListingGenerator.Generators
             var scaleOptions = listingInfo["scales"]!.AsArray();
             var sizes = new List<KeyValuePair<string, double>>();
             var scaleFrom = scaleCalculator.TranslateToScale(defaultScale);
-            var priceList = calculatePointsAndDefinePriceList(listingInfo);
+            var figureTier = calculatePointsAndDefinePriceList(listingInfo);
 
             foreach (var scaleOption in scaleOptions)
             {
                 var scaleOpt = Convert.ToInt16(scaleOption!.ToString());
                 var scaledSize = scaleCalculator.Convert(defaultSize, scaleFrom, scaleCalculator.TranslateToScale(scaleOpt));
                 var roudedSize = Math.Round(scaledSize, 0);
-                sizes.Add(new KeyValuePair<string, double>($"DIY ({roudedSize} cm)", priceList[scaleOpt]));
-                sizes.Add(new KeyValuePair<string, double>($"Polished ({roudedSize} cm)", priceList[scaleOpt] + polishePrices[scaleOpt]));
-                sizes.Add(new KeyValuePair<string, double>($"Painted ({roudedSize} cm)", priceList[scaleOpt] + polishePrices[scaleOpt] + paintedPrice));
+                sizes.Add(new KeyValuePair<string, double>($"DIY ({roudedSize} cm)", figureTier.PriceList[scaleOpt]));
+                sizes.Add(new KeyValuePair<string, double>($"Polished ({roudedSize} cm)", figureTier.PriceList[scaleOpt] + polishePrices[scaleOpt]));
+                sizes.Add(new KeyValuePair<string, double>($"Painted ({roudedSize} cm)", figureTier.PriceList[scaleOpt] + polishePrices[scaleOpt] + paintedPrice));
             }
 
             return FormatAndSortSizes(sizes);
@@ -100,7 +174,14 @@ namespace EtsyBacklogListingGenerator.Generators
             return string.Join("\n", ordered.Select(s => $"- {s.Key} {Math.Truncate(s.Value*100) / 100}".Replace(".", ",")));
         }
 
-        private Dictionary<int, double> calculatePointsAndDefinePriceList(JsonNode info)
+        private struct FigureTier
+        {
+            public int Points;
+            public int Tier;
+            public Dictionary<int, double> PriceList;
+        }
+
+        private FigureTier calculatePointsAndDefinePriceList(JsonNode info)
         {
             var attributes = info["points"]!.Deserialize<Dictionary<string, int>>();
             var points = 0;
@@ -111,11 +192,35 @@ namespace EtsyBacklogListingGenerator.Generators
             }
 
             if (points < 3) // 0-2 -> standard figure
-                return priceListA;
+                return new FigureTier
+                {
+                    PriceList = priceListA,
+                    Points = points,
+                    Tier = 1
+                };
             else if (points < 5) // 3-4 -> complex figure
-                return priceListB;
+                return new FigureTier
+                {
+                    PriceList = priceListB,
+                    Tier = 2,
+                    Points = points
+                };
             else // 5-n -> big diorama
-                return priceListC;
+                return new FigureTier
+                {
+                    PriceList = priceListC,
+                    Points = points,
+                    Tier = 3
+                };
         }
+    }
+
+    public sealed class FigureFinishProcessingTimes
+    {
+        public required ProcessingTime DiyUnpainted { get; init; }
+
+        public required ProcessingTime PolishedUnpainted { get; init; }
+
+        public required ProcessingTime Painted { get; init; }
     }
 }

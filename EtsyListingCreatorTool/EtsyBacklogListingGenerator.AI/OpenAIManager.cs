@@ -1,6 +1,6 @@
-using OpenAI.Chat;
+﻿using OpenAI.Chat;
 
-namespace EtsyBacklogListingGenerator.AI
+namespace EtsyBacklogListingGenerator
 {
     public class OpenAIManager
     {

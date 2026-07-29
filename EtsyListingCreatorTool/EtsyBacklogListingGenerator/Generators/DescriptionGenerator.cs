@@ -1,7 +1,4 @@
-﻿using EtsyBacklogListingGenerator.AI;
-
-
-namespace EtsyBacklogListingGenerator.Generators
+﻿namespace EtsyBacklogListingGenerator.Generators
 {
     public class DescriptionGenerator(OpenAIManager aiManager) : AISupportedGenerator
     {

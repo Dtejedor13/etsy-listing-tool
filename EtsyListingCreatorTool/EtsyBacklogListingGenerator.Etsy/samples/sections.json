@@ -1,0 +1,110 @@
+{
+  "count": 15,
+  "results": [
+    {
+      "shop_section_id": 57625133,
+      "title": "",
+      "rank": 1,
+      "user_id": 938550293,
+      "active_listing_count": 0
+    },
+    {
+      "shop_section_id": 57610004,
+      "title": "Wargame Bases",
+      "rank": 2,
+      "user_id": 938550293,
+      "active_listing_count": 0
+    },
+    {
+      "shop_section_id": 57610006,
+      "title": "Services",
+      "rank": 3,
+      "user_id": 938550293,
+      "active_listing_count": 0
+    },
+    {
+      "shop_section_id": 57799837,
+      "title": "Chibi Garage Kits",
+      "rank": 4,
+      "user_id": 938550293,
+      "active_listing_count": 0
+    },
+    {
+      "shop_section_id": 58219431,
+      "title": "Naruto Figures",
+      "rank": 5,
+      "user_id": 938550293,
+      "active_listing_count": 24
+    },
+    {
+      "shop_section_id": 58219435,
+      "title": "One Piece Figures",
+      "rank": 6,
+      "user_id": 938550293,
+      "active_listing_count": 15
+    },
+    {
+      "shop_section_id": 58219481,
+      "title": "Anime Figures",
+      "rank": 7,
+      "user_id": 938550293,
+      "active_listing_count": 23
+    },
+    {
+      "shop_section_id": 58219485,
+      "title": "Video Game Figures",
+      "rank": 8,
+      "user_id": 938550293,
+      "active_listing_count": 7
+    },
+    {
+      "shop_section_id": 58219529,
+      "title": "Dragonball Figures",
+      "rank": 9,
+      "user_id": 938550293,
+      "active_listing_count": 2
+    },
+    {
+      "shop_section_id": 58399859,
+      "title": "Demon Slayer",
+      "rank": 10,
+      "user_id": 938550293,
+      "active_listing_count": 7
+    },
+    {
+      "shop_section_id": 58549355,
+      "title": "Yugioh",
+      "rank": 11,
+      "user_id": 938550293,
+      "active_listing_count": 4
+    },
+    {
+      "shop_section_id": 59315971,
+      "title": "Marvel \/ DC",
+      "rank": 12,
+      "user_id": 938550293,
+      "active_listing_count": 1
+    },
+    {
+      "shop_section_id": 59315973,
+      "title": "Jujutsu Kaisen",
+      "rank": 13,
+      "user_id": 938550293,
+      "active_listing_count": 3
+    },
+    {
+      "shop_section_id": 59315995,
+      "title": "Soul Eater",
+      "rank": 14,
+      "user_id": 938550293,
+      "active_listing_count": 3
+    },
+    {
+      "shop_section_id": 59538220,
+      "title": "Hueforge Art",
+      "rank": 15,
+      "user_id": 938550293,
+      "active_listing_count": 4
+    }
+  ]
+}

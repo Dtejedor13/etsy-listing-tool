@@ -26,3 +26,4 @@ No pricing, shipping, or licensing mentions
 
 when asking for description so only provide description.
 provide only tags if you get asked for.
+when proving tags pls do only send max 13 tags avoid special characters and symbols etsy have issues with
